@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coffee Beans - Kapiculture</title>
+  <link rel="stylesheet" href="beans.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="../index.html" class="logo">कैपीकल्चर</a>
+    <div class="menu-toggle">
+      <span></span><span></span><span></span>
+    </div>
+    <nav>
+  <ul>
+    <li><a href="/GroundCoffeePage/ground.html">Ground Coffee</a></li>
+    <li><a href="/BeansPage/beans.html">Coffee Beans</a></li>
+    <li><a href="#" class="under-progress">Accessories</a></li>
+    <li><a href="#" class="under-progress">Tools & Machines</a></li>
+    <li><a href="#" class="under-progress">Your Stash 🛍️</a></li>
+    <li><a href="/SellerPage/seller.html">Become Seller</a></li>
+    <li class="login"><a href="/Login/login.html">Login</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <!-- Search Banner -->
+  <section class="search-banner">
+    <div class="tagline-top">Discover the perfect roast, grind, or gear.</div>
+    <input type="text" id="searchBar" placeholder="Search your coffee..." />
+    <div class="tagline-bottom">From bean to brew, we bring you closer to your coffee journey.</div>
+  </section>
+
+  <!-- Page Title -->
+  <section class="category-page">
+    <h1><a href="beans.html">Coffee Beans</a></h1>
+    <div class="filters-products-wrapper">
+      <!-- Filters -->
+      <div class="filters">
+        <button class="clear-filters">Clear Filters</button>
+
+        <details open>
+          <summary>Roast Level</summary>
+          <div class="filter-group">
+            <label><input type="checkbox" /> Dark</label>
+            <label><input type="checkbox" /> Light</label>
+            <label><input type="checkbox" /> Medium</label>
+            <label><input type="checkbox" /> Medium Dark</label>
+          </div>
+        </details>
+
+        <details open>
+          <summary>Drinking Preference</summary>
+          <div class="filter-group">
+            <label><input type="checkbox" /> With Milk</label>
+            <label><input type="checkbox" /> With or Without Milk</label>
+            <label><input type="checkbox" /> Without Milk</label>
+          </div>
+        </details>
+
+        <details open>
+          <summary>Flavour Profile</summary>
+          <div class="filter-group">
+            <label><input type="checkbox" /> Balanced</label>
+            <label><input type="checkbox" /> Bold and Bitter</label>
+            <label><input type="checkbox" /> Chocolatey and Nutty</label>
+            <label><input type="checkbox" /> Delicate and Complex</label>
+            <label><input type="checkbox" /> Producer Series</label>
+          </div>
+        </details>
+
+        <details open>
+          <summary>Price</summary>
+          <div class="filter-group">
+            <label><input type="checkbox" /> Under ₹300</label>
+            <label><input type="checkbox" /> ₹300 – ₹600</label>
+            <label><input type="checkbox" /> ₹600 – ₹1000</label>
+            <label><input type="checkbox" /> ₹1000+</label>
+          </div>
+        </details>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="product-grid">
+        <!-- Dummy Product -->
+        <div class="product-card">
+          <a href="#" class="product-link">
+            <img src="https://www.thirdwavecoffeeroasters.com/cdn/shop/products/1_e49e09b5-6de2-43ce-82a9-ae5a03f386e4_1200x1200.jpg?v=1672991807" alt="Coffee Beans" />
+            <div class="product-info">
+              <h3>Signature Arabica Beans</h3>
+              <p>250g pack – ₹540</p>
+              <div class="quantity-controls">
+                <button class="qty-btn decrease">−</button>
+                <span class="qty-number">0</span>
+                <button class="qty-btn increase">+</button>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Repeat the above block 7 more times for mockup display -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Brewed with ❤️ in India</p>
+    <p><a href="../index.html" class="footer-copy">© 2025 Kapiculture. All rights reserved.</a></p>
+  </footer>
+
+  <script src="beans.js"></script>
+</body>
+</html>

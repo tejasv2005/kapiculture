@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ground Coffee - Kapiculture</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+   <!-- Navbar -->
+  <header class="navbar">
+    <a href="../index.html" class="logo">कैपीकल्चर</a>
+    <div class="menu-toggle">
+      <span></span><span></span><span></span>
+    </div>
+    <nav>
+  <ul>
+    <li><a href="/GroundCoffeePage/ground.html">Ground Coffee</a></li>
+    <li><a href="/BeansPage/beans.html">Coffee Beans</a></li>
+    <li><a href="#" class="under-progress">Accessories</a></li>
+    <li><a href="#" class="under-progress">Tools & Machines</a></li>
+    <li><a href="#" class="under-progress">Your Stash 🛍️</a></li>
+    <li><a href="/SellerPage/seller.html">Become Seller</a></li>
+    <li class="login"><a href="/Login/login.html">Login</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="search-wrapper">
+      <input type="text" id="search-input" placeholder="Search for coffee, beans, accessories..." aria-label="Search products" />
+    </div>
+    <p class="search-tagline">Discover the perfect roast, grind, or gear.</p>
+    <p class="search-subtagline">From bean to brew, we bring you closer to your coffee journey.</p>
+  </section>
+
+  <!-- Page Heading -->
+  <section class="page-heading">
+    <h1><a href="ground.html" class="no-underline">Ground Coffee</a></h1>
+  </section>
+
+  <!-- Filters and Products -->
+  <section class="filters-products-wrapper">
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="clear-filters">Clear Filters</button>
+
+      <details open>
+        <summary>Roast Level</summary>
+        <div class="filter-group">
+          <label><input type="checkbox" data-filter="roast" value="dark" /> Dark</label>
+          <label><input type="checkbox" data-filter="roast" value="light" /> Light</label>
+          <label><input type="checkbox" data-filter="roast" value="medium" /> Medium</label>
+          <label><input type="checkbox" data-filter="roast" value="medium-dark" /> Medium Dark</label>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Drinking Preference</summary>
+        <div class="filter-group">
+          <label><input type="checkbox" data-filter="preference" value="with-milk" /> With Milk</label>
+          <label><input type="checkbox" data-filter="preference" value="with-or-without-milk" /> With or Without Milk</label>
+          <label><input type="checkbox" data-filter="preference" value="without-milk" /> Without Milk</label>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Flavour Profile</summary>
+        <div class="filter-group">
+          <label><input type="checkbox" data-filter="flavour" value="balanced" /> Balanced</label>
+          <label><input type="checkbox" data-filter="flavour" value="bold-bitter" /> Bold and Bitter</label>
+          <label><input type="checkbox" data-filter="flavour" value="chocolatey-nutty" /> Chocolatey and Nutty</label>
+          <label><input type="checkbox" data-filter="flavour" value="delicate-complex" /> Delicate and Complex</label>
+          <label><input type="checkbox" data-filter="flavour" value="producer-series" /> Producer Series</label>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Equipment</summary>
+        <div class="filter-group">
+          <label><input type="checkbox" data-filter="equipment" value="aeropress" /> Aeropress</label>
+          <label><input type="checkbox" data-filter="equipment" value="channi" /> Channi</label>
+          <label><input type="checkbox" data-filter="equipment" value="cold-brew" /> Cold Brew</label>
+          <label><input type="checkbox" data-filter="equipment" value="espresso" /> Espresso</label>
+          <label><input type="checkbox" data-filter="equipment" value="french-press" /> French Press</label>
+          <label><input type="checkbox" data-filter="equipment" value="inverted-aeropress" /> Inverted Aeropress</label>
+          <label><input type="checkbox" data-filter="equipment" value="moka-pot" /> Moka Pot</label>
+          <label><input type="checkbox" data-filter="equipment" value="pourover" /> Pourover</label>
+          <label><input type="checkbox" data-filter="equipment" value="south-indian-filter" /> South Indian Filter</label>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Price</summary>
+        <div class="filter-group">
+          <label><input type="checkbox" data-filter="price" value="under-300" /> Under ₹300</label>
+          <label><input type="checkbox" data-filter="price" value="300-600" /> ₹300 – ₹600</label>
+          <label><input type="checkbox" data-filter="price" value="600-1000" /> ₹600 – ₹1000</label>
+          <label><input type="checkbox" data-filter="price" value="above-1000" /> ₹1000+</label>
+        </div>
+      </details>
+    </div>
+
+    <!-- Products -->
+    <div class="product-grid" id="product-grid">
+
+      <!-- Example product card -->
+      <!-- You will have 8 dummy products, all using the same image for now -->
+
+      <div class="product-card" data-roast="dark" data-preference="with-milk" data-flavour="bold-bitter" data-equipment="espresso" data-price="600-1000">
+        <a href="#" class="product-link">
+          <img src="https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800" alt="Coffee Pack" />
+          <div class="product-info">
+            <h3>Blue Tokai</h3>
+            <p>Chocolatey Monsoon Malabar 250g</p>
+            <p>₹850</p>
+          </div>
+        </a>
+        <div class="quantity-controls">
+          <button class="qty-btn minus">-</button>
+          <span class="qty-number">0</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      </div>
+
+      <!-- Repeat 7 more products with different tags and details -->
+
+      <div class="product-card" data-roast="light" data-preference="without-milk" data-flavour="balanced" data-equipment="french-press" data-price="300-600">
+        <a href="#" class="product-link">
+          <img src="https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800" alt="Coffee Pack" />
+          <div class="product-info">
+            <h3>KC Roasters</h3>
+            <p>Light Roast Classic 200g</p>
+            <p>₹450</p>
+          </div>
+        </a>
+        <div class="quantity-controls">
+          <button class="qty-btn minus">-</button>
+          <span class="qty-number">0</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      </div>
+
+      <div class="product-card" data-roast="medium" data-preference="with-or-without-milk" data-flavour="chocolatey-nutty" data-equipment="cold-brew" data-price="under-300">
+        <a href="#" class="product-link">
+          <img src="https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800" alt="Coffee Pack" />
+          <div class="product-info">
+            <h3>Sunbean Coffee</h3>
+            <p>Medium Roast Special 150g</p>
+            <p>₹250</p>
+          </div>
+        </a>
+        <div class="quantity-controls">
+          <button class="qty-btn minus">-</button>
+          <span class="qty-number">0</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      </div>
+
+      <div class="product-card" data-roast="medium-dark" data-preference="without-milk" data-flavour="delicate-complex" data-equipment="aeropress" data-price="above-1000">
+        <a href="#" class="product-link">
+          <img src="https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800" alt="Coffee Pack" />
+          <div class="product-info">
+            <h3>Hilltop Coffee</h3>
+            <p>Dark Roast Reserve 300g</p>
+            <p>₹1200</p>
+          </div>
+        </a>
+        <div class="quantity-controls">
+          <button class="qty-btn minus">-</button>
+          <span class="qty-number">0</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      </div>
+
+      <div class="product-card" data-roast="dark" data-preference="with-milk" data-flavour="producer-series" data-equipment="espresso" data-price="300-600">
+        <a href="#" class="product-link">
+          <img src="https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800" alt="Coffee Pack" />
+          <div class="product-info">
+            <h3>Estate Beans</h3>
+            <p>Producer Series Exclusive 250g</p>
+            <p>₹550</p>
+          </div>
+        </a>
+        <div class="quantity-controls">
+          <button class="qty-btn minus">-</button>
+          <span class="qty-number">0</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      </div>
+
+      <div class="product-card" data-roast="light" data-preference="with-or-without-milk" data-flavour="bold-bitter" data-equipment="pourover" data-price="600-1000">
+        <a href="#" class="product-link">
+          <img src="https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800" alt="Coffee Pack" />
+          <div class="product-info">
+            <h3>Morning Brew</h3>
+            <p>Light & Bold Blend 250g</p>
+            <p>₹700</p>
+          </div>
+        </a>
+        <div class="quantity-controls">
+          <button class="qty-btn minus">-</button>
+          <span class="qty-number">0</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      </div>
+
+      <div class="product-card" data-roast="medium" data-preference="without-milk" data-flavour="balanced" data-equipment="south-indian-filter" data-price="300-600">
+        <a href="#" class="product-link">
+          <img src="https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800" alt="Coffee Pack" />
+          <div class="product-info">
+            <h3>Filter Classic</h3>
+            <p>Medium Roast South Indian 250g</p>
+            <p>₹500</p>
+          </div>
+        </a>
+        <div class="quantity-controls">
+          <button class="qty-btn minus">-</button>
+          <span class="qty-number">0</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      </div>
+
+      <div class="product-card" data-roast="medium-dark" data-preference="with-milk" data-flavour="chocolatey-nutty" data-equipment="moka-pot" data-price="above-1000">
+        <a href="#" class="product-link">
+          <img src="https://bluetokaicoffee.com/cdn/shop/files/1.MonsoonMalabar-HoysalaEstate__Front.jpg?v=1747054624&width=1800" alt="Coffee Pack" />
+          <div class="product-info">
+            <h3>Velvet Roast</h3>
+            <p>Rich Moka Pot Blend 300g</p>
+            <p>₹1500</p>
+          </div>
+        </a>
+        <div class="quantity-controls">
+          <button class="qty-btn minus">-</button>
+          <span class="qty-number">0</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Brewed with ❤️ in India</p>
+    <p>© 2025 Kapiculture. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

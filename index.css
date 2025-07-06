@@ -1,0 +1,330 @@
+/* Root Variables */
+:root {
+  --accent: #d5a373;
+  --bg: #f2ebe3;
+  --cta: #5c3d2e;
+  --cta-hover: #7e4e35;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --text: #3e2c29;
+  --white: #ffffff;
+}
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--cta);
+  color: var(--white);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+  color: var(--white);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--white);
+  border-radius: 2px;
+}
+
+.navbar nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.navbar nav ul li a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar nav ul li a:hover {
+  color: var(--accent);
+}
+
+.navbar nav ul li.login {
+  margin-left: auto;
+}
+
+/* Hero Section */
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--white);
+  background-image: url('https://images.unsplash.com/photo-1465176728568-7da7e336b1e9?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+.hero h1,
+.hero p,
+.hero .btn,
+.hero .search-bar {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Search Bar & Dropdown */
+.search-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 2px 4px var(--shadow);
+  background-color: var(--white);
+}
+
+.search-bar:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(213, 163, 115, 0.3);
+}
+
+.suggestions-list {
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: var(--white);
+  box-shadow: 0 4px 12px var(--shadow);
+  border-radius: 8px;
+  margin-top: 8px;
+  z-index: 10;
+}
+
+.suggestions-list li {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.suggestions-list li:hover {
+  background-color: var(--bg);
+}
+
+.suggestions-list li.no-result {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  cursor: default;
+  pointer-events: none;
+  background-color: transparent;
+}
+
+/* Button */
+.btn {
+  background-color: var(--cta);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.btn:hover {
+  background-color: var(--cta-hover);
+}
+
+/* Categories */
+.categories {
+  padding: 3rem 2rem;
+  background-color: var(--white);
+  text-align: center;
+}
+
+.categories h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--cta);
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--shadow);
+  background-size: cover;
+  background-position: center;
+  min-height: 180px;
+  color: var(--white);
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  border-radius: 12px;
+}
+
+.category-card > div {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+.category-card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Toast (SweetAlert2) Custom Style */
+.swal2-popup-custom {
+  border-radius: 10px !important;
+  font-family: 'Segoe UI', sans-serif !important;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  padding: 1.2rem 1.5rem !important;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: var(--cta);
+  color: var(--white);
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.footer-link {
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .navbar nav ul {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    background-color: var(--cta);
+    padding: 1rem 0;
+  }
+
+  .navbar nav ul.active {
+    display: flex;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}

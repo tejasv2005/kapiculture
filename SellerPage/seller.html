@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Become a Seller - Kapiculture</title>
+  <link rel="stylesheet" href="seller.css" />
+  <script src="seller.js" defer></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="seller.html" class="logo">कैपीकल्चर Seller</a>
+    <div class="menu-toggle">
+      <span></span><span></span><span></span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li class="login"><a href="#">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Step Progress Bar -->
+  <div class="progress-bar">
+    <div class="step active">Business Info</div>
+    <div class="step">Brand Details</div>
+    <div class="step">Confirmation</div>
+  </div>
+
+  <!-- Step 1: Business Info -->
+  <section id="step-one">
+    <h2>Become a Seller with Kapiculture</h2>
+    <p class="tagline">Brew your coffee legacy, one bean, one store, one customer at a time.</p>
+
+    <form id="stepOneForm">
+      <label for="gst">GST Number <span title="15-character alphanumeric code.">❓</span>:</label>
+      <input type="text" id="gst" maxlength="15" placeholder="Enter 15-digit GSTIN" required />
+      <div id="gstError" class="error-message">GST number must be 15 characters long.</div>
+
+      <label for="pan">PAN Number <span title="Permanent Account Number (Optional)">❓</span>:</label>
+      <input type="text" id="pan" maxlength="10" placeholder="ABCDE1234F" />
+
+      <fieldset>
+        <legend>Business Type:</legend>
+        <label><input type="checkbox" name="businessType[]" value="Roaster" /> Roaster</label>
+        <label><input type="checkbox" name="businessType[]" value="Farm/Producer" /> Farm/Producer</label>
+        <label><input type="checkbox" name="businessType[]" value="Cafe Brand" /> Cafe Brand</label>
+        <label><input type="checkbox" name="businessType[]" value="Equipment Manufacturer" /> Equipment Manufacturer</label>
+        <label><input type="checkbox" name="businessType[]" value="Accessories Vendor" /> Accessories Vendor</label>
+        <label>
+          <input type="checkbox" id="businessTypeOther" /> Other
+          <input type="text" id="businessTypeOtherInput" class="other-description" placeholder="Please specify" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Product Category:</legend>
+        <label><input type="checkbox" name="productCategory[]" value="Ground Coffee" /> Ground Coffee</label>
+        <label><input type="checkbox" name="productCategory[]" value="Coffee Beans" /> Coffee Beans</label>
+        <label><input type="checkbox" name="productCategory[]" value="Accessories" /> Accessories</label>
+        <label><input type="checkbox" name="productCategory[]" value="Machines & Tools" /> Machines & Tools</label>
+        <label><input type="checkbox" name="productCategory[]" value="Gift Sets" /> Gift Sets</label>
+        <label>
+          <input type="checkbox" id="productCategoryOther" /> Other
+          <input type="text" id="productCategoryOtherInput" class="other-description" placeholder="Please specify" />
+        </label>
+      </fieldset>
+
+      <label for="deliveryCoverage">Delivery Coverage (Pin codes/States):</label>
+      <textarea id="deliveryCoverage" rows="2" placeholder="e.g., Pan India, Maharashtra & Karnataka only"></textarea>
+
+      <label for="registrationDoc">Business Registration Certificate (PDF/Image):</label>
+      <input type="file" id="registrationDoc" accept=".pdf,image/*" />
+
+      <button id="nextStepBtn" type="button">Next Step</button>
+    </form>
+  </section>
+
+  <!-- Step 2: Brand Details -->
+  <section id="step-two" class="hidden">
+    <h2>Brand Details</h2>
+    <form id="stepTwoForm">
+
+      <label for="brandName">Brand Name:</label>
+      <input type="text" id="brandName" placeholder="e.g., BeanBrew Co." required />
+
+      <label>
+        <input type="checkbox" id="sameNameToggle" /> Use brand name as store name
+      </label>
+
+      <label for="storeName">Store Name:</label>
+      <input type="text" id="storeName" required />
+
+      <label for="brandLogo">Brand Logo:</label>
+      <input type="file" id="brandLogo" accept="image/*" />
+
+      <label for="fssai">FSSAI Certificate (PDF/Image):</label>
+      <input type="file" id="fssai" accept=".pdf,image/*" />
+
+      <label for="address">Brand Address:</label>
+      <textarea id="address" rows="3" required></textarea>
+
+      <label for="contactNumber">Brand Contact Number:</label>
+      <input type="tel" id="contactNumber" placeholder="+91 9876543210" required />
+
+      <label for="supportEmail">Brand Support Email (optional):</label>
+      <input type="email" id="supportEmail" placeholder="support@example.com" />
+
+      <label for="brandEmail">Brand Official Email:</label>
+      <input type="email" id="brandEmail" required />
+
+      <label for="description">Brand Description:</label>
+      <textarea id="description" rows="3" placeholder="Tell us your coffee story..." required></textarea>
+
+      <label for="yearFounded">Year Founded:</label>
+      <input type="number" id="yearFounded" min="1900" max="2099" placeholder="e.g., 2019" />
+
+      <label for="website">Website or Social Media:</label>
+      <input type="url" id="website" placeholder="https://instagram.com/yourbrand" />
+
+      <label for="bankDetails">Bank Details (For Payments):</label>
+      <textarea id="bankDetails" rows="2" placeholder="Account Name, Number, IFSC" required></textarea>
+
+      <label for="certifications">Certifications (Upload):</label>
+      <input type="file" id="certifications" accept=".pdf,image/*" />
+
+      <label>
+        <input type="checkbox" id="termsCheckbox" required />
+        I agree to Kapiculture’s Seller Terms & Privacy Policy.
+      </label>
+
+      <button id="submitSellerForm" type="submit">Submit</button>
+    </form>
+  </section>
+
+  <!-- Success Page -->
+  <section id="success-page" class="hidden">
+    <div class="success-checkmark">✔</div>
+    <h2>Welcome to Kapiculture, Seller!</h2>
+    <p>We're brewing your brand profile ☕</p>
+    <p>Sit tight while we verify your documents and prepare your marketplace experience.</p>
+    <p>Bringing coffee to every cup, together.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="../index.html" class="footer-link">कैपीकल्चर © 2025</a>
+    <p>Brewed with ❤️ in India</p>
+  </footer>
+
+</body>
+</html>

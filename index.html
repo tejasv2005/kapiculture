@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kapiculture - Home</title>
+  <link rel="stylesheet" href="index.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="logo" id="kapicultureLogo">कैपीकल्चर</a>
+    <div class="menu-toggle">
+      <span></span><span></span><span></span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="./GroundCoffeePage/ground.html">Ground Coffee</a></li>
+        <li><a href="./BeansPage/beans.html">Coffee Beans</a></li>
+        <li><a href="#" class="under-progress">Accessories</a></li>
+        <li><a href="#" class="under-progress">Tools & Machines</a></li>
+        <li><a href="#" class="under-progress">Your Stash 🛍️</a></li>
+        <li><a href="./SellerPage/seller.html">Become Seller</a></li>
+        <li class="login"><a href="./Login/login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <h1>Your Brew, Your Vibe ☕️</h1>
+      <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search 🔍 coffee, gear, brands...">
+        <ul class="suggestions-list"></ul>
+      </div>
+      <p>From bean to brew, we bring you closer to your coffee journey.</p>
+    </section>
+
+    <!-- Category Section -->
+    <section class="categories">
+      <h2>Explore Categories</h2>
+      <div class="category-list">
+        <a href="./GroundCoffeePage/ground.html" class="category-card" style="background-image: url('https://levelground.com/cdn/shop/articles/Blog-Feature-Coffee-Grind_1445x.jpg?v=1617223597');">
+          <div><h3>Ground Coffee</h3></div>
+        </a>
+        <a href="./BeansPage/beans.html" class="category-card" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.1.0');">
+          <div><h3>Coffee Beans</h3></div>
+        </a>
+        <a href="#" class="category-card under-progress" style="background-image: url('https://images.unsplash.com/photo-1471440671318-55bdbb772f93?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.1.0');">
+          <div><h3>Accessories</h3></div>
+        </a>
+        <a href="#" class="category-card under-progress" style="background-image: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0');">
+          <div><h3>Tools & Machines</h3></div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="index.html" class="footer-link">कैपीकल्चर © 2025</a>
+    <p>Brewed with ❤️ in India</p>
+  </footer>
+
+  <!-- Toast Notification for Under-Progress Links -->
+  <script>
+    document.querySelectorAll(".under-progress").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'info',
+          title: 'Still Brewing... ☕',
+          text: 'This section is under progress. Please check back soon!',
+          showCloseButton: true,
+          showConfirmButton: false,
+          timer: 5000,
+          timerProgressBar: true,
+          background: '#f0e9de',
+          color: '#3e2c29',
+          customClass: {
+            popup: 'swal2-popup-custom'
+          },
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
