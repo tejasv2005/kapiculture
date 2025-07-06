@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ground Coffee - Kapiculture</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -21,8 +22,8 @@
     <li><a href="#" class="under-progress">Accessories</a></li>
     <li><a href="#" class="under-progress">Tools & Machines</a></li>
     <li><a href="#" class="under-progress">Your Stash 🛍️</a></li>
-    <li><a href="/SellerPage/seller.html">Become Seller</a></li>
-    <li class="login"><a href="/LoginPage/login.html">Login</a></li>
+    <li><a href="../SellerPage/seller.html">Become Seller</a></li>
+    <li class="login"><a href="../LoginPage/login.html">Login</a></li>
   </ul>
 </nav>
   </header>
@@ -250,7 +251,38 @@
     <p>© 2025 Kapiculture. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+   <!-- Toast Notification for Under-Progress Links -->
+  <script>
+    document.querySelectorAll(".under-progress").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'info',
+          title: 'Still Brewing... ☕',
+          text: 'This section is under progress. Please check back soon!',
+          showCloseButton: true,
+          showConfirmButton: false,
+          timer: 5000,
+          timerProgressBar: true,
+          background: '#f0e9de',
+          color: '#3e2c29',
+          customClass: {
+            popup: 'swal2-popup-custom'
+          },
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
+
+
 
