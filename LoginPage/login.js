@@ -1,3 +1,25 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyCy4DBVOl9-28ZNdKLF42p6D-ECvkzP88g",
+  authDomain: "kapikulture.firebaseapp.com",
+  projectId: "kapikulture",
+  storageBucket: "kapikulture.firebasestorage.app",
+  messagingSenderId: "1066051890850",
+  appId: "1:1066051890850:web:43db9d0e101eced86c31fb",
+  measurementId: "G-YJPB76S6D7"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("loginBtn");
   const signupBtn = document.getElementById("signupBtn");
@@ -19,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.classList.remove("active");
   });
 
-  // Add password visibility toggles
+  // Password visibility toggles
   addPasswordToggle("loginPassword");
   addPasswordToggle("signupPassword");
   addPasswordToggle("signupConfirm");
@@ -33,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.style.alignItems = "center";
 
     const eyeIcon = document.createElement("span");
-    eyeIcon.textContent = "🙈"; // hidden by default
+    eyeIcon.textContent = "🙈";
     eyeIcon.style.cursor = "pointer";
     eyeIcon.style.marginLeft = "10px";
     eyeIcon.style.fontSize = "1.2rem";
@@ -46,36 +68,42 @@ document.addEventListener("DOMContentLoaded", () => {
     eyeIcon.addEventListener("click", () => {
       if (input.type === "password") {
         input.type = "text";
-        eyeIcon.textContent = "👁️"; // show eye open
+        eyeIcon.textContent = "👁️";
       } else {
         input.type = "password";
-        eyeIcon.textContent = "🙈"; // show eye closed
+        eyeIcon.textContent = "🙈";
       }
     });
   }
 
-  // Login Form Submission
+  // Login Submission
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = document.getElementById("loginEmail").value.trim();
     const pass = document.getElementById("loginPassword").value.trim();
     const role = document.querySelector('input[name="role"]:checked').value;
 
-    if (email === "" || pass === "") {
+    if (!email || !pass) {
       Swal.fire("Missing Info", "Please fill in all login fields.", "warning");
-    } else {
-      Swal.fire("Welcome back! ☕", "You're now logged in.", "success").then(() => {
-        // Redirect based on role
-        if (role === "seller") {
-          window.location.href = "../SellerPage/seller.html";
-        } else {
-          window.location.href = "../Home Page/home.html";
-        }
-      });
+      return;
     }
+
+    signInWithEmailAndPassword(auth, email, pass)
+      .then(() => {
+        Swal.fire("Welcome back! ☕", "You're now logged in.", "success").then(() => {
+          if (role === "seller") {
+            window.location.href = "../SellerPage/seller.html";
+          } else {
+            window.location.href = "../index.html";
+          }
+        });
+      })
+      .catch((error) => {
+        Swal.fire("Login Failed", error.message, "error");
+      });
   });
 
-  // Signup Form Submission
+  // Signup Submission
   signupForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.getElementById("signupName").value.trim();
@@ -93,8 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    Swal.fire("Account Created!", "You're all set to brew with us ☕", "success").then(() => {
-      loginBtn.click();
-    });
+    createUserWithEmailAndPassword(auth, email, pass)
+      .then(() => {
+        Swal.fire("Account Created!", "You're all set to brew with us ☕", "success").then(() => {
+          loginBtn.click(); // Switch to login form
+        });
+      })
+      .catch((error) => {
+        Swal.fire("Signup Failed", error.message, "error");
+      });
   });
 });
