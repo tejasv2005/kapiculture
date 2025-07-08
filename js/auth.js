@@ -25,66 +25,83 @@ const auth = getAuth(app);
 // 👤 User State Logic
 document.addEventListener("DOMContentLoaded", () => {
   const loginElement = document.querySelector(".login a");
-
-  // Optional user display spot
-  let userDisplay = document.querySelector(".username-display");
-  if (!userDisplay) {
-    userDisplay = document.createElement("span");
-    userDisplay.className = "username-display";
-    userDisplay.style.marginLeft = "15px";
-    userDisplay.style.fontWeight = "bold";
-    userDisplay.style.color = "#3e2c29";
-    loginElement?.parentElement?.appendChild(userDisplay);
-  }
-
   if (!loginElement) return;
+
+  // Account Button (dynamically created)
+  let userDropdownBtn = document.querySelector(".user-dropdown-btn");
+  if (!userDropdownBtn) {
+    userDropdownBtn = document.createElement("button");
+    userDropdownBtn.className = "user-dropdown-btn";
+    userDropdownBtn.style.marginLeft = "15px";
+    userDropdownBtn.style.background = "#f0e9de"; // Always visible
+    userDropdownBtn.style.border = "none";
+    userDropdownBtn.style.cursor = "pointer";
+    userDropdownBtn.style.fontWeight = "bold";
+    userDropdownBtn.style.fontSize = "1rem";
+    userDropdownBtn.style.color = "#3e2c29"; // Match navbar
+    userDropdownBtn.style.padding = "6px 10px";
+    userDropdownBtn.style.borderRadius = "8px";
+    userDropdownBtn.style.transition = "all 0.2s ease";
+  }
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      const username = user.email.split('@')[0];
+      const username = user.email.split("@")[0];
       loginElement.textContent = "Logout";
       loginElement.href = "#";
-      userDisplay.textContent = `☕ ${username}`;
+      userDropdownBtn.textContent = `☕ ${username}`;
 
+      // Append if not already present
+      if (!userDropdownBtn.isConnected) {
+        loginElement.parentElement?.appendChild(userDropdownBtn);
+      }
+
+      // Welcome Message (once per session)
       if (!sessionStorage.getItem("welcomed")) {
         Swal.fire({
           toast: true,
-          position: 'top-end',
-          icon: 'success',
+          position: "top-end",
+          icon: "success",
           title: `Welcome back, ${username} 👋`,
           showCloseButton: true,
           showConfirmButton: false,
           timer: 5000,
           timerProgressBar: true,
-          background: '#f0e9de',
-          color: '#3e2c29',
+          background: "#f0e9de",
+          color: "#3e2c29",
           customClass: {
-            popup: 'swal2-popup-custom'
+            popup: "swal2-popup-custom"
           },
           didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
           }
         });
         sessionStorage.setItem("welcomed", "true");
       }
 
+      // 👆 Clicking the name
+      userDropdownBtn.onclick = () => {
+        window.location.href = "./accountpage/account.html"; // ✅ case-sensitive
+      };
+
+      // 🚪 Logout
       loginElement.addEventListener("click", (e) => {
         e.preventDefault();
         Swal.fire({
-          title: 'Are you sure?',
+          title: "Are you sure?",
           text: "You’ll be logged out of Kapiculture.",
-          icon: 'warning',
+          icon: "warning",
           showCancelButton: true,
-          confirmButtonColor: '#5C4033',
-          cancelButtonColor: '#aaa',
-          confirmButtonText: 'Yes, Logout',
-          cancelButtonText: 'Cancel',
+          confirmButtonColor: "#5C4033",
+          cancelButtonColor: "#aaa",
+          confirmButtonText: "Yes, Logout",
+          cancelButtonText: "Cancel",
           showCloseButton: true,
-          background: '#f0e9de',
-          color: '#3e2c29',
+          background: "#f0e9de",
+          color: "#3e2c29",
           customClass: {
-            popup: 'swal2-popup-custom'
+            popup: "swal2-popup-custom"
           }
         }).then((result) => {
           if (result.isConfirmed) {
@@ -93,17 +110,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 sessionStorage.removeItem("welcomed");
                 Swal.fire({
                   toast: true,
-                  position: 'top-end',
-                  icon: 'success',
-                  title: 'You’ve been logged out.',
+                  position: "top-end",
+                  icon: "success",
+                  title: "You’ve been logged out.",
                   showCloseButton: true,
                   showConfirmButton: false,
                   timer: 3000,
                   timerProgressBar: true,
-                  background: '#f0e9de',
-                  color: '#3e2c29',
+                  background: "#f0e9de",
+                  color: "#3e2c29",
                   customClass: {
-                    popup: 'swal2-popup-custom'
+                    popup: "swal2-popup-custom"
                   }
                 }).then(() => {
                   window.location.href = "./LoginPage/login.html";
@@ -111,12 +128,12 @@ document.addEventListener("DOMContentLoaded", () => {
               })
               .catch((error) => {
                 Swal.fire({
-                  icon: 'error',
-                  title: 'Oops!',
+                  icon: "error",
+                  title: "Oops!",
                   text: error.message,
                   showCloseButton: true,
-                  background: '#f0e9de',
-                  color: '#3e2c29'
+                  background: "#f0e9de",
+                  color: "#3e2c29"
                 });
               });
           }
@@ -124,10 +141,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
     } else {
-      // Not logged in
+      // 🔓 Logged Out
       loginElement.textContent = "Login";
       loginElement.href = "./LoginPage/login.html";
-      userDisplay.textContent = "";
+      if (userDropdownBtn.isConnected) {
+        userDropdownBtn.remove();
+      }
     }
   });
 });
