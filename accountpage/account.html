@@ -4,22 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Account | Kapiculture</title>
-  <link rel="stylesheet" href="/accountpage/account.css">
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="account.css">
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <a href="/index.html">Kapiculture ☕</a>
+      <a href="../index.html">Kapiculture ☕</a>
     </div>
     <div class="nav-items">
-      <a href="/index.html">Home</a>
-      <a href="/products.html">Shop</a>
-      <a href="/about.html">About</a>
+      <a href="../index.html">Home</a>
+      <a href="../BeansPage/beans.html">Shop</a>
+      <a href="../about.html">About</a>
       <span class="user-menu">
-        <span id="username-nav"></span>
+        <span id="username-nav">Guest</span>
         <button id="logout-btn">Logout</button>
       </span>
     </div>
@@ -31,7 +34,7 @@
     <aside class="sidebar">
       <div class="user-profile">
         <div class="profile-img-container">
-          <img id="profile-img" src="/assets/default-profile.png" alt="Profile Picture">
+          <img id="profile-img" src="../assets/default-profile.png" alt="Profile Picture">
           <label for="profile-upload" class="upload-btn">
             <i class="fas fa-camera"></i>
           </label>
@@ -59,7 +62,7 @@
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required readonly>
           </div>
           <div class="form-group">
             <label for="phone">Phone Number</label>
@@ -69,7 +72,45 @@
         </form>
       </div>
 
-      <!-- Other tabs will be loaded dynamically -->
+      <!-- Orders Tab Content -->
+      <div id="orders-tab" class="tab-content">
+        <h2>Your Orders</h2>
+        <div class="empty-message">
+          <p>You haven't placed any orders yet.</p>
+          <a href="../BeansPage/beans.html" class="shop-btn">Start Shopping</a>
+        </div>
+      </div>
+
+      <!-- Settings Tab Content -->
+      <div id="settings-tab" class="tab-content">
+        <h2>Account Settings</h2>
+        <div class="preferences-section">
+          <h4>Notification Preferences</h4>
+          <label class="checkbox-container">
+            <input type="checkbox" checked>
+            <span class="checkmark"></span>
+            Email notifications
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" checked>
+            <span class="checkmark"></span>
+            Promotional offers
+          </label>
+        </div>
+      </div>
+
+      <!-- Security Tab Content -->
+      <div id="security-tab" class="tab-content">
+        <h2>Security Settings</h2>
+        <div class="security-options">
+          <button id="change-password-btn" class="security-btn">
+            <i class="fas fa-key"></i> Change Password
+          </button>
+          <button id="two-factor-btn" class="security-btn">
+            <i class="fas fa-lock"></i> Two-Factor Authentication
+          </button>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -79,7 +120,20 @@
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
   
-  <!-- Main App JS -->
-  <script src="/accountpage/account.js"></script>
+  <!-- Local JS -->
+  <script src="account.js"></script>
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCy4DBVOl9-28ZNdKLF42p6D-ECvkzP88g",
+      authDomain: "kapikulture.firebaseapp.com",
+      projectId: "kapikulture",
+      storageBucket: "kapikulture.appspot.com",
+      messagingSenderId: "1066051890850",
+      appId: "1:1066051890850:web:43db9d0e101eced86c31fb",
+      measurementId: "G-YJPB76S6D7"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 </body>
 </html>
