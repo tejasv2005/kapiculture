@@ -1,84 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Account – Kapiculture</title>
-  <link rel="stylesheet" href="../AccountPage/account.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account | Kapiculture</title>
+  <link rel="stylesheet" href="/accountpage/account.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script type="module" src="../js/auth.js"></script>
-  <script type="module" src="../AccountPage/account.js" defer></script>
 </head>
 <body>
-
   <!-- Navbar -->
   <header class="navbar">
-    <a href="../index.html" class="logo">कैपीकल्चर</a>
-    <nav>
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../GroundCoffeePage/ground.html">Ground Coffee</a></li>
-        <li><a href="../BeansPage/beans.html">Coffee Beans</a></li>
-        <li><a href="#">Accessories</a></li>
-        <li><a href="#">Tools & Machines</a></li>
-        <li class="login"><a href="../LoginPage/login.html">Login</a></li>
-      </ul>
-    </nav>
+    <div class="logo">
+      <a href="/index.html">Kapiculture ☕</a>
+    </div>
+    <div class="nav-items">
+      <a href="/index.html">Home</a>
+      <a href="/products.html">Shop</a>
+      <a href="/about.html">About</a>
+      <span class="user-menu">
+        <span id="username-nav"></span>
+        <button id="logout-btn">Logout</button>
+      </span>
+    </div>
   </header>
 
-  <!-- Profile Header -->
-  <section class="profile-header">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Profile Pic" class="profile-pic" />
-    <div class="profile-info">
-      <h2 id="profile-username">Username</h2>
-      <button class="edit-btn" id="edit-profile-btn">✏️ Edit profile</button>
-    </div>
-    <div class="profile-stats">
-      <div><strong>12</strong><span>Reviews</span></div>
-      <div><strong>0</strong><span>Photos</span></div>
-      <div><strong>0</strong><span>Followers</span></div>
-    </div>
-  </section>
-
-  <!-- Main -->
-  <main class="main-container">
-    
+  <!-- Main Content -->
+  <div class="main-container">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <h3>My Account</h3>
+      <div class="user-profile">
+        <div class="profile-img-container">
+          <img id="profile-img" src="/assets/default-profile.png" alt="Profile Picture">
+          <label for="profile-upload" class="upload-btn">
+            <i class="fas fa-camera"></i>
+          </label>
+          <input type="file" id="profile-upload" accept="image/*">
+        </div>
+        <h2 id="username-display">Loading...</h2>
+      </div>
       <ul>
-        <li class="active">Profile</li>
-        <li>My Orders</li>
-        <li>My Subscriptions</li>
-        <li>Address Book</li>
-        <li>Preferences</li>
-        <li id="delete-account-btn" style="color: red;">Delete Account</li>
+        <li class="active" data-tab="profile"><i class="fas fa-user"></i> Profile</li>
+        <li data-tab="orders"><i class="fas fa-box-open"></i> Orders</li>
+        <li data-tab="settings"><i class="fas fa-cog"></i> Settings</li>
+        <li data-tab="security"><i class="fas fa-shield-alt"></i> Security</li>
       </ul>
     </aside>
 
-    <!-- Content Section -->
-    <section class="content" id="account-content">
-      <div class="user-info">
-        <div class="username-display" id="username-display">Welcome, User</div>
-        <div class="username-edit" style="display: none;">
-          <input type="text" id="username-input" placeholder="New Username" />
-          <button id="save-username-btn">Save</button>
-        </div>
+    <!-- Content Area -->
+    <main class="content">
+      <!-- Profile Tab Content -->
+      <div id="profile-tab" class="tab-content active">
+        <h2>Profile Information</h2>
+        <form id="profile-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          <button type="submit" class="save-btn">Save Changes</button>
+        </form>
       </div>
 
-      <h4>🎯 Kapiculture Milestones</h4>
-      <p>Order 7 packs, get 1 FREE!</p>
-      <div class="milestone-bar">
-        <div class="progress" style="width: 57%;"></div>
-      </div>
-      <p><strong>4 / 7 completed</strong></p>
-    </section>
-  </main>
+      <!-- Other tabs will be loaded dynamically -->
+    </main>
+  </div>
 
-  <footer class="footer">
-    <a href="../index.html" class="footer-link">कैपीकल्चर © 2025</a>
-    <p>Brewed with ❤️ in India</p>
-  </footer>
-
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+  
+  <!-- Main App JS -->
+  <script src="/accountpage/account.js"></script>
 </body>
 </html>

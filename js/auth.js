@@ -1,5 +1,3 @@
-// js/auth.js
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import {
   getAuth,
@@ -7,7 +5,13 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-// 🔐 Firebase config
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+// 🔐 Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyCy4DBVOl9-28ZNdKLF42p6D-ECvkzP88g",
   authDomain: "kapikulture.firebaseapp.com",
@@ -21,42 +25,58 @@ const firebaseConfig = {
 // 🔁 Init Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-// 👤 User State Logic
 document.addEventListener("DOMContentLoaded", () => {
   const loginElement = document.querySelector(".login a");
+
+  // ⛔ Don't proceed if navbar missing
   if (!loginElement) return;
 
-  // Account Button (dynamically created)
+  // User button element
   let userDropdownBtn = document.querySelector(".user-dropdown-btn");
   if (!userDropdownBtn) {
     userDropdownBtn = document.createElement("button");
     userDropdownBtn.className = "user-dropdown-btn";
     userDropdownBtn.style.marginLeft = "15px";
-    userDropdownBtn.style.background = "#f0e9de"; // Always visible
+    userDropdownBtn.style.background = "#f0e9de";
     userDropdownBtn.style.border = "none";
     userDropdownBtn.style.cursor = "pointer";
     userDropdownBtn.style.fontWeight = "bold";
     userDropdownBtn.style.fontSize = "1rem";
-    userDropdownBtn.style.color = "#3e2c29"; // Match navbar
+    userDropdownBtn.style.color = "#3e2c29";
     userDropdownBtn.style.padding = "6px 10px";
     userDropdownBtn.style.borderRadius = "8px";
     userDropdownBtn.style.transition = "all 0.2s ease";
   }
 
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      const username = user.email.split("@")[0];
+      const uid = user.uid;
+      let username = user.email.split("@")[0];
+      let profileImage = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; // default
+
+      try {
+        const userDoc = await getDoc(doc(db, "users", uid));
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          if (data.username) username = data.username;
+          if (data.profileImage) profileImage = data.profileImage;
+        }
+      } catch (err) {
+        console.warn("⚠️ Failed to fetch user data:", err);
+      }
+
       loginElement.textContent = "Logout";
       loginElement.href = "#";
-      userDropdownBtn.textContent = `☕ ${username}`;
 
-      // Append if not already present
+      // Show username button
+      userDropdownBtn.innerHTML = `<img src="${profileImage}" style="width: 24px; height: 24px; border-radius: 50%; margin-right: 6px; vertical-align: middle;"> ${username}`;
       if (!userDropdownBtn.isConnected) {
         loginElement.parentElement?.appendChild(userDropdownBtn);
       }
 
-      // Welcome Message (once per session)
+      // Welcome Toast once
       if (!sessionStorage.getItem("welcomed")) {
         Swal.fire({
           toast: true,
@@ -69,23 +89,16 @@ document.addEventListener("DOMContentLoaded", () => {
           timerProgressBar: true,
           background: "#f0e9de",
           color: "#3e2c29",
-          customClass: {
-            popup: "swal2-popup-custom"
-          },
-          didOpen: (toast) => {
-            toast.addEventListener("mouseenter", Swal.stopTimer);
-            toast.addEventListener("mouseleave", Swal.resumeTimer);
-          }
         });
         sessionStorage.setItem("welcomed", "true");
       }
 
-      // 👆 Clicking the name
+      // Redirect to account page
       userDropdownBtn.onclick = () => {
-        window.location.href = "./accountpage/account.html"; // ✅ case-sensitive
+        window.location.href = "/accountpage/account.html";
       };
 
-      // 🚪 Logout
+      // Logout
       loginElement.addEventListener("click", (e) => {
         e.preventDefault();
         Swal.fire({
@@ -97,12 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
           cancelButtonColor: "#aaa",
           confirmButtonText: "Yes, Logout",
           cancelButtonText: "Cancel",
-          showCloseButton: true,
           background: "#f0e9de",
-          color: "#3e2c29",
-          customClass: {
-            popup: "swal2-popup-custom"
-          }
+          color: "#3e2c29"
         }).then((result) => {
           if (result.isConfirmed) {
             signOut(auth)
@@ -118,10 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   timer: 3000,
                   timerProgressBar: true,
                   background: "#f0e9de",
-                  color: "#3e2c29",
-                  customClass: {
-                    popup: "swal2-popup-custom"
-                  }
+                  color: "#3e2c29"
                 }).then(() => {
                   window.location.href = "./LoginPage/login.html";
                 });
@@ -131,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   icon: "error",
                   title: "Oops!",
                   text: error.message,
-                  showCloseButton: true,
                   background: "#f0e9de",
                   color: "#3e2c29"
                 });
@@ -141,7 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
     } else {
-      // 🔓 Logged Out
       loginElement.textContent = "Login";
       loginElement.href = "./LoginPage/login.html";
       if (userDropdownBtn.isConnected) {
