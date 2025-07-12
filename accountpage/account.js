@@ -1,16 +1,4 @@
-// Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyCy4DBVOl9-28ZNdKLF42p6D-ECvkzP88g",
-  authDomain: "kapikulture.firebaseapp.com",
-  projectId: "kapikulture",
-  storageBucket: "kapikulture.appspot.com",
-  messagingSenderId: "1066051890850",
-  appId: "1:1066051890850:web:43db9d0e101eced86c31fb",
-  measurementId: "G-YJPB76S6D7"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase services
 const auth = firebase.auth();
 const db = firebase.firestore();
 const storage = firebase.storage();
@@ -26,24 +14,35 @@ const usernameInput = document.getElementById('username');
 const emailInput = document.getElementById('email');
 const phoneInput = document.getElementById('phone');
 
-// Check Authentication State
-auth.onAuthStateChanged(async (user) => {
+// Tab Navigation
+document.querySelectorAll('.sidebar li').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.sidebar li').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    
+    document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+  });
+});
+
+// Check authentication state
+auth.onAuthStateChanged(async user => {
   if (!user) {
-    window.location.href = '/login.html';
+    window.location.href = "../LoginPage/login.html";
     return;
   }
-  
-  console.log("User authenticated:", user.uid);
-  
+
   try {
     // Load user data from Firestore
     const userDoc = await db.collection("users").doc(user.uid).get();
     
     if (userDoc.exists) {
-      console.log("User document data:", userDoc.data());
       const userData = userDoc.data();
       
-      // Update UI with user data
+      // Update profile display
       usernameDisplay.textContent = userData.username || user.email.split('@')[0];
       usernameNav.textContent = userData.username || user.email.split('@')[0];
       usernameInput.value = userData.username || '';
@@ -55,7 +54,6 @@ auth.onAuthStateChanged(async (user) => {
         profileImg.src = userData.profileImageUrl;
       }
     } else {
-      console.log("No user document found, creating one...");
       // Create user document if it doesn't exist
       await db.collection("users").doc(user.uid).set({
         username: user.email.split('@')[0],
@@ -68,12 +66,7 @@ auth.onAuthStateChanged(async (user) => {
     }
   } catch (error) {
     console.error("Error loading user data:", error);
-    Swal.fire({
-      icon: 'error',
-      title: 'Error',
-      text: 'Failed to load user data',
-      footer: error.message
-    });
+    Swal.fire('Error', 'Failed to load account data', 'error');
   }
 });
 
@@ -86,13 +79,10 @@ profileUpload.addEventListener('change', async (e) => {
   if (!user) return;
 
   try {
-    // Show loading state
     Swal.fire({
       title: 'Uploading image...',
       allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      }
+      didOpen: () => Swal.showLoading()
     });
 
     // Upload to Firebase Storage
@@ -133,13 +123,10 @@ profileForm.addEventListener('submit', async (e) => {
   if (!user) return;
 
   try {
-    // Show loading state
     const swal = Swal.fire({
       title: 'Saving changes...',
       allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      }
+      didOpen: () => Swal.showLoading()
     });
 
     // Update Firestore
@@ -164,7 +151,7 @@ profileForm.addEventListener('submit', async (e) => {
 // Logout
 logoutBtn.addEventListener('click', () => {
   auth.signOut().then(() => {
-    window.location.href = '/login.html';
+    window.location.href = "../LoginPage/login.html";
   }).catch((error) => {
     console.error("Logout error:", error);
     Swal.fire('Error', 'Failed to logout', 'error');

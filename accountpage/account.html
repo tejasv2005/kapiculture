@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Account | Kapiculture</title>
   <!-- CSS -->
+  <link rel="stylesheet" href="account.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="./account.css">
+  <!-- SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  <!-- Navbar with corrected paths -->
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
       <a href="../index.html">Kapiculture ☕</a>
@@ -26,14 +27,13 @@
     </div>
   </header>
 
-  <!-- Main Content -->
   <div class="main-container">
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="user-profile">
         <div class="profile-img-container">
           <img id="profile-img" src="../assets/default-profile.png" alt="Profile" 
-               onerror="this.src='../assets/fallback-profile.png'">
+               onerror="this.onerror=null;this.src='../assets/fallback-profile.png'">
           <label for="profile-upload" class="upload-btn">
             <i class="fas fa-camera"></i>
           </label>
@@ -50,7 +50,6 @@
 
     <!-- Content Area -->
     <main class="content">
-      <!-- Profile Tab -->
       <div id="profile-tab" class="tab-content active">
         <h2>Profile Information</h2>
         <form id="profile-form">
@@ -63,25 +62,23 @@
             <input type="email" id="email" readonly>
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
+            <label for="phone">Phone Number</label>
             <input type="tel" id="phone">
           </div>
           <button type="submit" class="save-btn">Save Changes</button>
         </form>
       </div>
 
-      <!-- Orders Tab -->
       <div id="orders-tab" class="tab-content">
         <h2>Your Orders</h2>
         <div class="empty-message">
           <p>No orders yet</p>
-          <a href="../BeansPage/beans.html" class="shop-btn">Start Shopping</a>
+          <a href="../BeansPage/beans.html" class="shop-btn">Shop Now</a>
         </div>
       </div>
 
-      <!-- Settings Tab -->
       <div id="settings-tab" class="tab-content">
-        <h2>Account Settings</h2>
+        <h2>Settings</h2>
         <div class="security-options">
           <button id="change-password-btn" class="security-btn">
             <i class="fas fa-key"></i> Change Password
@@ -97,9 +94,8 @@
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
 
-  <!-- App Configuration -->
+  <!-- Initialize Firebase -->
   <script>
-    // Initialize Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCy4DBVOl9-28ZNdKLF42p6D-ECvkzP88g",
       authDomain: "kapikulture.firebaseapp.com",
@@ -109,16 +105,17 @@
       appId: "1:1066051890850:web:43db9d0e101eced86c31fb",
       measurementId: "G-YJPB76S6D7"
     };
-    
+
     try {
       firebase.initializeApp(firebaseConfig);
       console.log("Firebase initialized successfully");
     } catch (error) {
       console.error("Firebase initialization error:", error);
+      document.getElementById('username-display').textContent = "Error loading account";
     }
   </script>
 
-  <!-- Main JS -->
-  <script src="./account.js"></script>
+  <!-- Main JavaScript -->
+  <script src="account.js"></script>
 </body>
 </html>
